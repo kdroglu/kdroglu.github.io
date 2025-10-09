@@ -677,7 +677,9 @@
         <span class="close">&times;</span>
         <div class="modal-content" style="padding: 20px;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">3D Model Görüntüleyici</h3>
-            <iframe id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white;"></iframe>
+            <div id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white; display: flex; justify-content: center; align-items: center; color: var(--dark);">
+                <p>3D model görüntüleme özelliği şu anda kullanılamıyor. Model dosyasını indirmek için <a href="#" id="modelDownloadLink" style="color: var(--primary);">tıklayın</a>.</p>
+            </div>
         </div>
     </div>
 
@@ -1206,8 +1208,23 @@
         function view3DModel(modelUrl) {
             closeAllModals();
             const viewer = document.getElementById('modelViewer');
-            // Sketchfab embed kullanımı - daha güvenilir
-            viewer.src = `https://sketchfab.com/models/new?&autostart=1&transparent=1&ui_controls=1&ui_infos=1&ui_stop=1&ui_inspector=1&ui_watermark=1&ui_help=1&ui_hint=1&ui_settings=1&ui_fullscreen=1&ui_annotations=1`;
+            const downloadLink = document.getElementById('modelDownloadLink');
+            
+            // Model indirme linkini ayarla
+            downloadLink.href = modelUrl;
+            downloadLink.setAttribute('download', '');
+            
+            // Online 3D görüntüleyici yerine model dosyasını indirme seçeneği sun
+            viewer.innerHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <i class="fas fa-cube" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h4 style="color: var(--dark); margin-bottom: 15px;">3D Model Görüntüleyici</h4>
+                    <p style="color: var(--dark); margin-bottom: 20px;">3D model görüntüleme özelliği şu anda kullanılamıyor. Model dosyasını indirmek için aşağıdaki butona tıklayın.</p>
+                    <a href="${modelUrl}" class="btn" download style="background: var(--primary); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">
+                        <i class="fas fa-download"></i> Modeli İndir
+                    </a>
+                </div>
+            `;
             
             const modal = document.getElementById('modelModal');
             modal.style.display = 'block';
@@ -1224,7 +1241,6 @@
             
             // IFrame'leri temizle
             document.getElementById('pdfFrame').src = '';
-            document.getElementById('modelViewer').src = '';
             
             activeModal = null;
             document.body.style.overflow = 'auto';
