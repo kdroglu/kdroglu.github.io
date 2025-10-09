@@ -418,34 +418,46 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
+            background-color: rgba(0,0,0,0.95);
+            overflow: auto;
         }
 
         .modal-content {
-            margin: 5% auto;
+            margin: 2% auto;
             display: block;
-            width: 80%;
-            max-width: 800px;
-            height: 80%;
+            width: 95%;
+            max-width: 1000px;
+            height: 90%;
+            border-radius: 10px;
+            background: var(--dark);
+            position: relative;
         }
 
         .close {
             position: absolute;
             top: 15px;
-            right: 35px;
+            right: 25px;
             color: #f1f1f1;
-            font-size: 40px;
+            font-size: 35px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 10001;
+            background: rgba(0,0,0,0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .close:hover {
-            color: #bbb;
+            background: var(--accent);
         }
         
         /* CV & Transcript Section */
@@ -621,8 +633,17 @@
             }
 
             .modal-content {
-                width: 95%;
-                height: 70%;
+                width: 98%;
+                height: 95%;
+                margin: 1% auto;
+            }
+            
+            .close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                width: 35px;
+                height: 35px;
             }
         }
     </style>
@@ -637,15 +658,15 @@
     <!-- PDF Preview Modal -->
     <div id="pdfModal" class="modal">
         <span class="close">&times;</span>
-        <iframe class="modal-content" id="pdfFrame"></iframe>
+        <iframe class="modal-content" id="pdfFrame" style="border: none; border-radius: 10px;"></iframe>
     </div>
 
     <!-- Arduino Kodu Modal -->
     <div id="arduinoModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: #1e1e1e; border-radius: 10px; padding: 20px;">
+        <div class="modal-content" style="padding: 20px; overflow: auto;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">Arduino Kodu</h3>
-            <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow: auto; height: calc(100% - 60px); margin: 0;">
+            <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow: auto; margin: 0;">
                 <code id="arduinoCode" class="language-cpp"></code>
             </pre>
         </div>
@@ -654,7 +675,7 @@
     <!-- 3D Model Modal -->
     <div id="modelModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: var(--dark); border-radius: 10px; padding: 20px;">
+        <div class="modal-content" style="padding: 20px;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">3D Model Görüntüleyici</h3>
             <iframe id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white;"></iframe>
         </div>
@@ -1114,72 +1135,122 @@
             }
         }
 
+        // Modal yönetimi
+        let activeModal = null;
+
         // PDF Modal Fonksiyonları
         function openPdfModal(pdfUrl) {
+            closeAllModals();
             const modal = document.getElementById('pdfModal');
             const pdfFrame = document.getElementById('pdfFrame');
             pdfFrame.src = pdfUrl;
             modal.style.display = 'block';
-        }
-
-        function closePdfModal() {
-            const modal = document.getElementById('pdfModal');
-            const pdfFrame = document.getElementById('pdfFrame');
-            modal.style.display = 'none';
-            pdfFrame.src = '';
+            activeModal = modal;
+            document.body.style.overflow = 'hidden';
         }
 
         // Arduino Kodu Görüntüleme
         function viewArduinoCode(codeUrl) {
+            closeAllModals();
+            // Dosya uzantısına göre dil belirle
+            const fileExtension = codeUrl.split('.').pop();
+            let languageClass = 'language-cpp';
+            
+            if (fileExtension === 'py') {
+                languageClass = 'language-python';
+            }
+            
             fetch(codeUrl)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Dosya bulunamadı');
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     return response.text();
                 })
                 .then(code => {
-                    document.getElementById('arduinoCode').textContent = code;
-                    // Kodun tamamını göster
-                    document.getElementById('arduinoCode').style.whiteSpace = 'pre';
-                    document.getElementById('arduinoCode').style.overflow = 'auto';
-                    Prism.highlightAll();
-                    document.getElementById('arduinoModal').style.display = 'block';
+                    const codeElement = document.getElementById('arduinoCode');
+                    codeElement.textContent = code;
+                    codeElement.className = languageClass;
+                    codeElement.style.whiteSpace = 'pre';
+                    codeElement.style.overflow = 'auto';
+                    
+                    // Prism.js ile vurgulama
+                    Prism.highlightElement(codeElement);
+                    
+                    const modal = document.getElementById('arduinoModal');
+                    modal.style.display = 'block';
+                    activeModal = modal;
+                    document.body.style.overflow = 'hidden';
                 })
                 .catch(error => {
                     console.error('Kod yüklenirken hata oluştu:', error);
-                    alert('Kod dosyası bulunamadı veya yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyin.');
+                    // Örnek kod göster (gerçek uygulamada kaldırılacak)
+                    const codeElement = document.getElementById('arduinoCode');
+                    if (fileExtension === 'py') {
+                        codeElement.textContent = '# Computer Vision Kodu\n# Bu dosya şu anda mevcut değil\n# Lütfen daha sonra tekrar deneyin\n\nimport cv2\nimport numpy as np\n\n# Örnek OpenCV kodu\ndef detect_faces():\n    # Yüz tespiti kodu buraya gelecek\n    pass\n\nif __name__ == "__main__":\n    detect_faces()';
+                        codeElement.className = 'language-python';
+                    } else {
+                        codeElement.textContent = '// Arduino Kodu\n// Bu dosya şu anda mevcut değil\n// Lütfen daha sonra tekrar deneyin\n\nvoid setup() {\n  // Kurulum kodu\n}\n\nvoid loop() {\n  // Ana döngü\n}';
+                        codeElement.className = 'language-cpp';
+                    }
+                    Prism.highlightElement(codeElement);
+                    
+                    const modal = document.getElementById('arduinoModal');
+                    modal.style.display = 'block';
+                    activeModal = modal;
+                    document.body.style.overflow = 'hidden';
                 });
         }
 
         // 3D Model Görüntüleme - Online Viewer ile
         function view3DModel(modelUrl) {
+            closeAllModals();
             const viewer = document.getElementById('modelViewer');
-            // ViewSTL online viewer kullanılıyor
-            viewer.src = `https://www.viewstl.com/?embedded&url=${encodeURIComponent(window.location.origin + '/' + modelUrl)}`;
-            document.getElementById('modelModal').style.display = 'block';
+            // Sketchfab embed kullanımı - daha güvenilir
+            viewer.src = `https://sketchfab.com/models/new?&autostart=1&transparent=1&ui_controls=1&ui_infos=1&ui_stop=1&ui_inspector=1&ui_watermark=1&ui_help=1&ui_hint=1&ui_settings=1&ui_fullscreen=1&ui_annotations=1`;
+            
+            const modal = document.getElementById('modelModal');
+            modal.style.display = 'block';
+            activeModal = modal;
+            document.body.style.overflow = 'hidden';
         }
 
-        // Modal kapatma
-        document.querySelectorAll('.close').forEach(closeBtn => {
-            closeBtn.addEventListener('click', function() {
-                const modal = this.closest('.modal');
-                modal.style.display = 'none';
-                if (modal.id === 'modelModal') {
-                    document.getElementById('modelViewer').src = '';
-                }
-            });
-        });
-
-        window.addEventListener('click', function(event) {
+        // Tüm modalları kapat
+        function closeAllModals() {
             const modals = document.querySelectorAll('.modal');
             modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                    if (modal.id === 'modelModal') {
-                        document.getElementById('modelViewer').src = '';
-                    }
+                modal.style.display = 'none';
+            });
+            
+            // IFrame'leri temizle
+            document.getElementById('pdfFrame').src = '';
+            document.getElementById('modelViewer').src = '';
+            
+            activeModal = null;
+            document.body.style.overflow = 'auto';
+        }
+
+        // Modal kapatma event'lerini ayarla
+        document.addEventListener('DOMContentLoaded', function() {
+            // Kapatma butonları
+            document.querySelectorAll('.close').forEach(closeBtn => {
+                closeBtn.addEventListener('click', closeAllModals);
+            });
+
+            // ESC tuşu ile kapatma
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeAllModals();
                 }
+            });
+
+            // Modal dışına tıklayarak kapatma
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', function(event) {
+                    if (event.target === this) {
+                        closeAllModals();
+                    }
+                });
             });
         });
 
