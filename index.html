@@ -1202,13 +1202,13 @@
                 });
         }
 
-        // 3D Model Görüntüleme - Free Online Viewer
+        // 3D Model Görüntüleme - ViewSTL Online
         function view3DModel(modelName) {
             closeAllModals();
             const viewer = document.getElementById('modelViewer');
             
-            // Free online 3D viewer kullan - 3DViewerOnline
-            const viewerUrl = `https://3dviewer.net/embed.html#model=https://raw.githubusercontent.com/kdiroglu/3d-models/main/${modelName}.stl&camera=0,0,5,0,0,0&background=ffffff&autorotate=1`;
+            // ViewSTL Online kullan
+            const viewerUrl = `https://www.viewstl.com/?embedded&url=https://raw.githubusercontent.com/kdiroglu/3d-models/main/${modelName}.stl`;
             viewer.src = viewerUrl;
             
             const modal = document.getElementById('modelModal');
