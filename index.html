@@ -677,8 +677,11 @@
         <span class="close">&times;</span>
         <div class="modal-content" style="padding: 20px;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">3D Model Görüntüleyici</h3>
-            <div id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white; display: flex; justify-content: center; align-items: center; color: var(--dark);">
-                <p>3D model görüntüleme özelliği şu anda kullanılamıyor. Model dosyasını indirmek için <a href="#" id="modelDownloadLink" style="color: var(--primary);">tıklayın</a>.</p>
+            <div id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white;">
+                <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; gap: 20px;">
+                    <i class="fas fa-cube" style="font-size: 48px; color: var(--dark);"></i>
+                    <p style="color: var(--dark); text-align: center;">3D model görüntüleme özelliği şu anda kullanılamıyor.<br>Model dosyasını görüntülemek için lütfen <a href="#" id="modelViewerLink" style="color: var(--primary); font-weight: bold;">bu linki</a> kullanın.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -806,7 +809,7 @@
                         <p data-tr="Yüz ve Nesne Takibi" data-en="Face and Object Tracking">Yüz ve Nesne Takibi</p>
                         <div class="project-links">
                             <a href="assets/videos/computer-vision-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/computer-vision.py')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/computer-vision.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -1208,23 +1211,11 @@
         function view3DModel(modelUrl) {
             closeAllModals();
             const viewer = document.getElementById('modelViewer');
-            const downloadLink = document.getElementById('modelDownloadLink');
+            const modelViewerLink = document.getElementById('modelViewerLink');
             
-            // Model indirme linkini ayarla
-            downloadLink.href = modelUrl;
-            downloadLink.setAttribute('download', '');
-            
-            // Online 3D görüntüleyici yerine model dosyasını indirme seçeneği sun
-            viewer.innerHTML = `
-                <div style="text-align: center; padding: 20px;">
-                    <i class="fas fa-cube" style="font-size: 48px; color: var(--primary); margin-bottom: 20px;"></i>
-                    <h4 style="color: var(--dark); margin-bottom: 15px;">3D Model Görüntüleyici</h4>
-                    <p style="color: var(--dark); margin-bottom: 20px;">3D model görüntüleme özelliği şu anda kullanılamıyor. Model dosyasını indirmek için aşağıdaki butona tıklayın.</p>
-                    <a href="${modelUrl}" class="btn" download style="background: var(--primary); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">
-                        <i class="fas fa-download"></i> Modeli İndir
-                    </a>
-                </div>
-            `;
+            // Online 3D görüntüleyici kullan - Autodesk Viewer
+            const viewerUrl = `https://viewer.autodesk.com/id?urn=dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bW9kZWwv${btoa(modelUrl).replace(/=/g, '')}`;
+            viewer.innerHTML = `<iframe src="${viewerUrl}" style="width: 100%; height: 100%; border: none; border-radius: 5px;"></iframe>`;
             
             const modal = document.getElementById('modelModal');
             modal.style.display = 'block';
