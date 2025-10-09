@@ -327,24 +327,20 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(12, 14, 26, 0.5);
         }
         
         .project-media img,
         .project-media video,
         .project-media iframe {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.5s;
         }
         
         .project-card:hover .project-media img,
         .project-card:hover .project-media video {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
         .project-info {
@@ -418,46 +414,34 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 10000;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.95);
-            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
         }
 
         .modal-content {
-            margin: 2% auto;
+            margin: 5% auto;
             display: block;
-            width: 95%;
-            max-width: 1000px;
-            height: 90%;
-            border-radius: 10px;
-            background: var(--dark);
-            position: relative;
+            width: 80%;
+            max-width: 800px;
+            height: 80%;
         }
 
         .close {
             position: absolute;
             top: 15px;
-            right: 25px;
+            right: 35px;
             color: #f1f1f1;
-            font-size: 35px;
+            font-size: 40px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 10001;
-            background: rgba(0,0,0,0.7);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .close:hover {
-            background: var(--accent);
+            color: #bbb;
         }
         
         /* CV & Transcript Section */
@@ -633,17 +617,8 @@
             }
 
             .modal-content {
-                width: 98%;
-                height: 95%;
-                margin: 1% auto;
-            }
-            
-            .close {
-                top: 10px;
-                right: 15px;
-                font-size: 30px;
-                width: 35px;
-                height: 35px;
+                width: 95%;
+                height: 70%;
             }
         }
     </style>
@@ -658,15 +633,15 @@
     <!-- PDF Preview Modal -->
     <div id="pdfModal" class="modal">
         <span class="close">&times;</span>
-        <iframe class="modal-content" id="pdfFrame" style="border: none; border-radius: 10px;"></iframe>
+        <iframe class="modal-content" id="pdfFrame"></iframe>
     </div>
 
     <!-- Arduino Kodu Modal -->
     <div id="arduinoModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content" style="padding: 20px; overflow: auto;">
+        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: #1e1e1e; border-radius: 10px; padding: 20px;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">Arduino Kodu</h3>
-            <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow: auto; margin: 0;">
+            <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow: auto; height: calc(100% - 60px); margin: 0;">
                 <code id="arduinoCode" class="language-cpp"></code>
             </pre>
         </div>
@@ -675,7 +650,7 @@
     <!-- 3D Model Modal -->
     <div id="modelModal" class="modal">
         <span class="close">&times;</span>
-        <div class="modal-content" style="padding: 20px;">
+        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: var(--dark); border-radius: 10px; padding: 20px;">
             <h3 style="color: var(--primary); margin-bottom: 20px;">3D Model Görüntüleyici</h3>
             <iframe id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white;"></iframe>
         </div>
@@ -756,7 +731,7 @@
                 <div class="project-card">
                     <div class="project-badge" data-tr="Bitirme Çalışması" data-en="Graduation Project">Bitirme Çalışması</div>
                     <div class="project-media">
-                        <img src="assets/images/projects/robot-arm-control.jpeg" alt="Robot Arm Control with Haptic Feedback" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><rect x=\'100\' y=\'50\' width=\'200\' height=\'120\' rx=\'10\' fill=\'%2300d2d3\'/><path d=\'M150,80 L250,80 M150,100 L250,100 M150,120 L250,120 M150,140 L200,140\' stroke=\'%23192a56\' stroke-width=\'5\'/></svg>'">
+                        <img src="assets/images/projects/robot-arm-control.jpg" alt="Robot Arm Control with Haptic Feedback" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><rect x=\'100\' y=\'50\' width=\'200\' height=\'120\' rx=\'10\' fill=\'%2300d2d3\'/><path d=\'M150,80 L250,80 M150,100 L250,100 M150,120 L250,120 M150,140 L200,140\' stroke=\'%23192a56\' stroke-width=\'5\'/></svg>'">
                         <div class="project-tooltip" data-tr="Haptik geri bildirimli robot kol kontrol sistemi tasarımı ve uygulaması." data-en="Robot arm control system design and implementation with haptic feedback.">
                             Haptik geri bildirimli robot kol kontrol sistemi tasarımı ve uygulaması.
                         </div>
@@ -775,7 +750,7 @@
                 <!-- Proje 1 - Levitron -->
                 <div class="project-card">
                     <div class="project-media">
-                        <img src="assets/images/projects/levitron.jpeg" alt="Levitron Projesi" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300d2d3\'/><path d=\'M100,100 L150,50 L200,100 L250,50 L300,100\' stroke=\'%23192a56\' stroke-width=\'5\' fill=\'none\'/></svg>'">
+                        <img src="assets/images/projects/levitron.jpg" alt="Levitron Projesi" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300d2d3\'/><path d=\'M100,100 L150,50 L200,100 L250,50 L300,100\' stroke=\'%23192a56\' stroke-width=\'5\' fill=\'none\'/></svg>'">
                         <div class="project-tooltip" data-tr="Manyetik levitasyon sistemi ile havada asılı duran objelerin stabilizasyonu." data-en="Stabilization of objects floating in air with magnetic levitation system.">
                             Manyetik levitasyon sistemi ile havada asılı duran objelerin stabilizasyonu.
                         </div>
@@ -785,126 +760,16 @@
                         <p data-tr="Manyetik Levitasyon Sistemi" data-en="Magnetic Levitation System">Manyetik Levitasyon Sistemi</p>
                         <div class="project-links">
                             <a href="assets/videos/levitron-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('levitron')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/levitron.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
                             <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/levitron.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Proje 2 - Computer Vision -->
+                <!-- Proje 2 - Handpower Mechanics -->
                 <div class="project-card">
                     <div class="project-media">
-                        <img src="assets/images/projects/computer-vision.jpeg" alt="Computer Vision Tracking" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'60\' fill=\'%2300d2d3\'/><circle cx=\'200\' cy=\'100\' r=\'30\' fill=\'%23192a56\'/></svg>'">
-                        <div class="project-tooltip" data-tr="OpenCV ve Python kullanarak yüz ve nesne takip sistemi geliştirilmesi." data-en="Face and object tracking system development using OpenCV and Python.">
-                            OpenCV ve Python kullanarak yüz ve nesne takip sistemi geliştirilmesi.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="Computer Vision Tracking" data-en="Computer Vision Tracking">Computer Vision Tracking</h3>
-                        <p data-tr="Yüz ve Nesne Takibi" data-en="Face and Object Tracking">Yüz ve Nesne Takibi</p>
-                        <div class="project-links">
-                            <a href="assets/videos/computer-vision-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/computer-vision.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Proje 3 - Pan-Tilt Camera -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/pantilt-camera.jpeg" alt="Pan-Tilt Camera System" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><path d=\'M50,150 L150,50 L250,150 L350,50\' stroke=\'%23192a56\' stroke-width=\'8\' fill=\'none\'/></svg>'">
-                        <div class="project-tooltip" data-tr="İki eksenli kamera stabilizasyon sistemi ve kontrol mekanizması." data-en="Dual-axis camera stabilization system and control mechanism.">
-                            İki eksenli kamera stabilizasyon sistemi ve kontrol mekanizması.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="Pan-Tilt Camera" data-en="Pan-Tilt Camera">Pan-Tilt Camera</h3>
-                        <p data-tr="Kamera Stabilizasyon Sistemi" data-en="Camera Stabilization System">Kamera Stabilizasyon Sistemi</p>
-                        <div class="project-links">
-                            <a href="assets/videos/pantilt-camera-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('pantilt-camera')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/pantilt-camera.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Proje 4 - RC Car -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/rc-car.jpeg" alt="RC Car with Pedals" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><rect x=\'150\' y=\'80\' width=\'100\' height=\'60\' rx=\'10\' fill=\'%23192a56\'/><rect x=\'120\' y=\'140\' width=\'40\' height=\'20\' fill=\'%23192a56\'/><rect x=\'240\' y=\'140\' width=\'40\' height=\'20\' fill=\'%23192a56\'/></svg>'">
-                        <div class="project-tooltip" data-tr="Pedal ve direksiyon kontrollü RC araç tasarımı ve elektronik sistem entegrasyonu." data-en="Pedal and steering controlled RC vehicle design and electronic system integration.">
-                            Pedal ve direksiyon kontrollü RC araç tasarımı ve elektronik sistem entegrasyonu.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="RC Car with Pedals" data-en="RC Car with Pedals">RC Car with Pedals</h3>
-                        <p data-tr="Kontrol Sistemleri" data-en="Control Systems">Kontrol Sistemleri</p>
-                        <div class="project-links">
-                            <a href="assets/videos/rc-car-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('rc-car')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/rc-car.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proje 5 - Planetary Gearbox -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/planetary-gearbox.jpeg" alt="Planetary Gearbox" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300d2d3\'/><circle cx=\'200\' cy=\'100\' r=\'80\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'50\' fill=\'%2300a8ff\'/><circle cx=\'200\' cy=\'100\' r=\'20\' fill=\'%23192a56\'/></svg>'">
-                        <div class="project-tooltip" data-tr="BLDC motorlar için planet dişli kutusu tasarımı ve üretimi." data-en="Planetary gearbox design and manufacturing for BLDC motors.">
-                            BLDC motorlar için planet dişli kutusu tasarımı ve üretimi.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="Planetary Gearbox" data-en="Planetary Gearbox">Planetary Gearbox</h3>
-                        <p data-tr="BLDC Motor Dişli Sistemi" data-en="BLDC Motor Gear System">BLDC Motor Dişli Sistemi</p>
-                        <div class="project-links">
-                            <a href="assets/videos/planetary-gearbox-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('planetary-gearbox')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proje 6 - Battery BMS System -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/battery-bms.jpeg" alt="Battery BMS System" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><rect x=\'100\' y=\'70\' width=\'200\' height=\'60\' fill=\'%2300d2d3\'/><rect x=\'120\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/><rect x=\'180\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/><rect x=\'240\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/></svg>'">
-                        <div class="project-tooltip" data-tr="3S-2S lityum batarya sistemleri için BMS (Batarya Yönetim Sistemi) tasarımı." data-en="BMS (Battery Management System) design for 3S-2S lithium battery systems.">
-                            3S-2S lityum batarya sistemleri için BMS (Batarya Yönetim Sistemi) tasarımı.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="Battery BMS System" data-en="Battery BMS System">Battery BMS System</h3>
-                        <p data-tr="Batarya Yönetim Sistemi" data-en="Battery Management System">Batarya Yönetim Sistemi</p>
-                        <div class="project-links">
-                            <a href="assets/videos/battery-bms-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('battery-bms')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proje 7 - Photo-printed Keychain -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/photo-keychain.jpeg" alt="Photo-printed Keychain" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><rect x=\'150\' y=\'60\' width=\'100\' height=\'80\' rx=\'10\' fill=\'%23192a56\'/><circle cx=\'170\' cy=\'100\' r=\'15\' fill=\'%2300d2d3\'/><circle cx=\'230\' cy=\'100\' r=\'15\' fill=\'%2300d2d3\'/></svg>'">
-                        <div class="project-tooltip" data-tr="3D yazıcı ile fotoğraf baskılı mekanik anahtarlık tasarımı ve üretimi." data-en="3D printed photo-printed mechanical keychain design and manufacturing.">
-                            3D yazıcı ile fotoğraf baskılı mekanik anahtarlık tasarımı ve üretimi.
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3 data-tr="Photo-printed Keychain" data-en="Photo-printed Keychain">Photo-printed Keychain</h3>
-                        <p data-tr="3D Baskı ve Tasarım" data-en="3D Printing and Design">3D Baskı ve Tasarım</p>
-                        <div class="project-links">
-                            <a href="assets/videos/photo-keychain-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('photo-keychain')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Proje 8 - Handpower Mechanics -->
-                <div class="project-card">
-                    <div class="project-media">
-                        <img src="assets/images/projects/handpower-mechanics.jpeg" alt="Handpower Mechanics" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23e84118\'/><circle cx=\'100\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/><circle cx=\'300\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/></svg>'">
+                        <img src="assets/images/projects/handpower-mechanics.jpg" alt="Handpower Mechanics" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23e84118\'/><circle cx=\'100\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/><circle cx=\'300\' cy=\'100\' r=\'40\' fill=\'%23192a56\'/></svg>'">
                         <div class="project-tooltip" data-tr="El gücü ile çalışan mekanik sistemlerin tasarımı ve optimizasyonu." data-en="Design and optimization of hand-powered mechanical systems.">
                             El gücü ile çalışan mekanik sistemlerin tasarımı ve optimizasyonu.
                         </div>
@@ -914,7 +779,121 @@
                         <p data-tr="Mekanik Sistem Tasarımı" data-en="Mechanical System Design">Mekanik Sistem Tasarımı</p>
                         <div class="project-links">
                             <a href="assets/videos/handpower-mechanics-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="#" class="project-link nav-link" onclick="view3DModel('handpower-mechanics')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/handpower-mechanics.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/handpower-mechanics.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proje 3 - Pan-Tilt Camera -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/pantilt-camera.jpg" alt="Pan-Tilt Camera System" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><path d=\'M50,150 L150,50 L250,150 L350,50\' stroke=\'%23192a56\' stroke-width=\'8\' fill=\'none\'/></svg>'">
+                        <div class="project-tooltip" data-tr="İki eksenli kamera stabilizasyon sistemi ve kontrol mekanizması." data-en="Dual-axis camera stabilization system and control mechanism.">
+                            İki eksenli kamera stabilizasyon sistemi ve kontrol mekanizması.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="Pan-Tilt Camera" data-en="Pan-Tilt Camera">Pan-Tilt Camera</h3>
+                        <p data-tr="Kamera Stabilizasyon Sistemi" data-en="Camera Stabilization System">Kamera Stabilizasyon Sistemi</p>
+                        <div class="project-links">
+                            <a href="assets/videos/pantilt-camera-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/pantilt-camera.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/pantilt-camera.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proje 4 - Computer Vision -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/computer-vision.jpg" alt="Computer Vision Tracking" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'60\' fill=\'%2300d2d3\'/><circle cx=\'200\' cy=\'100\' r=\'30\' fill=\'%23192a56\'/></svg>'">
+                        <div class="project-tooltip" data-tr="OpenCV ve Python kullanarak yüz ve nesne takip sistemi geliştirilmesi." data-en="Face and object tracking system development using OpenCV and Python.">
+                            OpenCV ve Python kullanarak yüz ve nesne takip sistemi geliştirilmesi.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="Computer Vision Tracking" data-en="Computer Vision Tracking">Computer Vision Tracking</h3>
+                        <p data-tr="Yüz ve Nesne Takibi" data-en="Face and Object Tracking">Yüz ve Nesne Takibi</p>
+                        <div class="project-links">
+                            <a href="assets/videos/computer-vision-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/computer-vision.py')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 5 - RC Car -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/rc-car.jpg" alt="RC Car with Pedals" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><rect x=\'150\' y=\'80\' width=\'100\' height=\'60\' rx=\'10\' fill=\'%23192a56\'/><rect x=\'120\' y=\'140\' width=\'40\' height=\'20\' fill=\'%23192a56\'/><rect x=\'240\' y=\'140\' width=\'40\' height=\'20\' fill=\'%23192a56\'/></svg>'">
+                        <div class="project-tooltip" data-tr="Pedal ve direksiyon kontrollü RC araç tasarımı ve elektronik sistem entegrasyonu." data-en="Pedal and steering controlled RC vehicle design and electronic system integration.">
+                            Pedal ve direksiyon kontrollü RC araç tasarımı ve elektronik sistem entegrasyonu.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="RC Car with Pedals" data-en="RC Car with Pedals">RC Car with Pedals</h3>
+                        <p data-tr="Kontrol Sistemleri" data-en="Control Systems">Kontrol Sistemleri</p>
+                        <div class="project-links">
+                            <a href="assets/videos/rc-car-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/rc-car.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/rc-car.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 6 - Planetary Gearbox -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/planetary-gearbox.jpg" alt="Planetary Gearbox" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300d2d3\'/><circle cx=\'200\' cy=\'100\' r=\'80\' fill=\'%23192a56\'/><circle cx=\'200\' cy=\'100\' r=\'50\' fill=\'%2300a8ff\'/><circle cx=\'200\' cy=\'100\' r=\'20\' fill=\'%23192a56\'/></svg>'">
+                        <div class="project-tooltip" data-tr="BLDC motorlar için planet dişli kutusu tasarımı ve üretimi." data-en="Planetary gearbox design and manufacturing for BLDC motors.">
+                            BLDC motorlar için planet dişli kutusu tasarımı ve üretimi.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="Planetary Gearbox" data-en="Planetary Gearbox">Planetary Gearbox</h3>
+                        <p data-tr="BLDC Motor Dişli Sistemi" data-en="BLDC Motor Gear System">BLDC Motor Dişli Sistemi</p>
+                        <div class="project-links">
+                            <a href="assets/videos/planetary-gearbox-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/planetary-gearbox.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/planetary-gearbox.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 7 - Photo-printed Keychain -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/photo-keychain.jpg" alt="Photo-printed Keychain" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%2300a8ff\'/><rect x=\'150\' y=\'60\' width=\'100\' height=\'80\' rx=\'10\' fill=\'%23192a56\'/><circle cx=\'170\' cy=\'100\' r=\'15\' fill=\'%2300d2d3\'/><circle cx=\'230\' cy=\'100\' r=\'15\' fill=\'%2300d2d3\'/></svg>'">
+                        <div class="project-tooltip" data-tr="3D yazıcı ile fotoğraf baskılı mekanik anahtarlık tasarımı ve üretimi." data-en="3D printed photo-printed mechanical keychain design and manufacturing.">
+                            3D yazıcı ile fotoğraf baskılı mekanik anahtarlık tasarımı ve üretimi.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="Photo-printed Keychain" data-en="Photo-printed Keychain">Photo-printed Keychain</h3>
+                        <p data-tr="3D Baskı ve Tasarım" data-en="3D Printing and Design">3D Baskı ve Tasarım</p>
+                        <div class="project-links">
+                            <a href="assets/videos/photo-keychain-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/photo-keychain.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/photo-keychain.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proje 8 - Battery BMS System - SIRALAMA DEĞİŞTİRİLDİ -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img src="assets/images/projects/battery-bms.jpg" alt="Battery BMS System" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'200\' viewBox=\'0 0 400 200\'><rect width=\'400\' height=\'200\' fill=\'%23192a56\'/><rect x=\'100\' y=\'70\' width=\'200\' height=\'60\' fill=\'%2300d2d3\'/><rect x=\'120\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/><rect x=\'180\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/><rect x=\'240\' y=\'80\' width=\'40\' height=\'40\' fill=\'%23192a56\'/></svg>'">
+                        <div class="project-tooltip" data-tr="3S-2S lityum batarya sistemleri için BMS (Batarya Yönetim Sistemi) tasarımı." data-en="BMS (Battery Management System) design for 3S-2S lithium battery systems.">
+                            3S-2S lityum batarya sistemleri için BMS (Batarya Yönetim Sistemi) tasarımı.
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3 data-tr="Battery BMS System" data-en="Battery BMS System">Battery BMS System</h3>
+                        <p data-tr="Batarya Yönetim Sistemi" data-en="Battery Management System">Batarya Yönetim Sistemi</p>
+                        <div class="project-links">
+                            <a href="assets/videos/battery-bms-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/battery-bms.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="assets/pdf/battery-bms-schematic.pdf" class="project-link nav-link" target="_blank"><i class="fas fa-file-pdf"></i> <span data-tr="Devre Şeması" data-en="Circuit Diagram">Devre Şeması</span></a>
                         </div>
                     </div>
                 </div>
@@ -1019,7 +998,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-c.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
     <script>
         // Yıldız Efekti Oluşturma
         function createStars() {
@@ -1135,124 +1113,64 @@
             }
         }
 
-        // Modal yönetimi
-        let activeModal = null;
-
         // PDF Modal Fonksiyonları
         function openPdfModal(pdfUrl) {
-            closeAllModals();
             const modal = document.getElementById('pdfModal');
             const pdfFrame = document.getElementById('pdfFrame');
             pdfFrame.src = pdfUrl;
             modal.style.display = 'block';
-            activeModal = modal;
-            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfModal() {
+            const modal = document.getElementById('pdfModal');
+            const pdfFrame = document.getElementById('pdfFrame');
+            modal.style.display = 'none';
+            pdfFrame.src = '';
         }
 
         // Arduino Kodu Görüntüleme
         function viewArduinoCode(codeUrl) {
-            closeAllModals();
-            // Dosya uzantısına göre dil belirle
-            const fileExtension = codeUrl.split('.').pop();
-            let languageClass = 'language-cpp';
-            
-            if (fileExtension === 'py') {
-                languageClass = 'language-python';
-            }
-            
             fetch(codeUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(code => {
-                    const codeElement = document.getElementById('arduinoCode');
-                    codeElement.textContent = code;
-                    codeElement.className = languageClass;
-                    codeElement.style.whiteSpace = 'pre';
-                    codeElement.style.overflow = 'auto';
-                    
-                    // Prism.js ile vurgulama
-                    Prism.highlightElement(codeElement);
-                    
-                    const modal = document.getElementById('arduinoModal');
-                    modal.style.display = 'block';
-                    activeModal = modal;
-                    document.body.style.overflow = 'hidden';
+                    document.getElementById('arduinoCode').textContent = code;
+                    Prism.highlightAll();
+                    document.getElementById('arduinoModal').style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Kod yüklenirken hata oluştu:', error);
-                    // Örnek kod göster (gerçek uygulamada kaldırılacak)
-                    const codeElement = document.getElementById('arduinoCode');
-                    if (fileExtension === 'py') {
-                        codeElement.textContent = '# Computer Vision Kodu\n# Bu dosya şu anda mevcut değil\n# Lütfen daha sonra tekrar deneyin\n\nimport cv2\nimport numpy as np\n\n# Örnek OpenCV kodu\ndef detect_faces():\n    # Yüz tespiti kodu buraya gelecek\n    pass\n\nif __name__ == "__main__":\n    detect_faces()';
-                        codeElement.className = 'language-python';
-                    } else {
-                        codeElement.textContent = '// Arduino Kodu\n// Bu dosya şu anda mevcut değil\n// Lütfen daha sonra tekrar deneyin\n\nvoid setup() {\n  // Kurulum kodu\n}\n\nvoid loop() {\n  // Ana döngü\n}';
-                        codeElement.className = 'language-cpp';
-                    }
-                    Prism.highlightElement(codeElement);
-                    
-                    const modal = document.getElementById('arduinoModal');
-                    modal.style.display = 'block';
-                    activeModal = modal;
-                    document.body.style.overflow = 'hidden';
+                    alert('Kod yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyin.');
                 });
         }
 
-        // 3D Model Görüntüleme - ViewSTL Online
-        function view3DModel(modelName) {
-            closeAllModals();
+        // 3D Model Görüntüleme - Online Viewer ile
+        function view3DModel(modelUrl) {
             const viewer = document.getElementById('modelViewer');
-            
-            // ViewSTL Online kullan
-            const viewerUrl = `https://www.viewstl.com/?embedded&url=https://raw.githubusercontent.com/kdiroglu/3d-models/main/${modelName}.stl`;
-            viewer.src = viewerUrl;
-            
-            const modal = document.getElementById('modelModal');
-            modal.style.display = 'block';
-            activeModal = modal;
-            document.body.style.overflow = 'hidden';
+            // ViewSTL online viewer kullanılıyor
+            viewer.src = `https://www.viewstl.com/?embedded&url=${encodeURIComponent(window.location.origin + '/' + modelUrl)}`;
+            document.getElementById('modelModal').style.display = 'block';
         }
 
-        // Tüm modalları kapat
-        function closeAllModals() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
+        // Modal kapatma
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
                 modal.style.display = 'none';
-            });
-            
-            // IFrame'leri temizle
-            document.getElementById('pdfFrame').src = '';
-            document.getElementById('modelViewer').src = '';
-            
-            activeModal = null;
-            document.body.style.overflow = 'auto';
-        }
-
-        // Modal kapatma event'lerini ayarla
-        document.addEventListener('DOMContentLoaded', function() {
-            // Kapatma butonları
-            document.querySelectorAll('.close').forEach(closeBtn => {
-                closeBtn.addEventListener('click', closeAllModals);
-            });
-
-            // ESC tuşu ile kapatma
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    closeAllModals();
+                if (modal.id === 'modelModal') {
+                    document.getElementById('modelViewer').src = '';
                 }
             });
+        });
 
-            // Modal dışına tıklayarak kapatma
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.addEventListener('click', function(event) {
-                    if (event.target === this) {
-                        closeAllModals();
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    if (modal.id === 'modelModal') {
+                        document.getElementById('modelViewer').src = '';
                     }
-                });
+                }
             });
         });
 
