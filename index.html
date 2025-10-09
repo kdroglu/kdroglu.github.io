@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Kadir Kadiroğlu - YTÜ Mekatronik Mühendisi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism-tomorrow.min.css">
     <style>
         :root {
             --primary: #00a8ff;
@@ -635,6 +636,26 @@
         <iframe class="modal-content" id="pdfFrame"></iframe>
     </div>
 
+    <!-- Arduino Kodu Modal -->
+    <div id="arduinoModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: #1e1e1e; border-radius: 10px; padding: 20px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">Arduino Kodu</h3>
+            <pre style="background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow: auto; height: calc(100% - 60px); margin: 0;">
+                <code id="arduinoCode" class="language-cpp"></code>
+            </pre>
+        </div>
+    </div>
+
+    <!-- 3D Model Modal -->
+    <div id="modelModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content" style="height: 90%; width: 90%; max-width: 1200px; background: var(--dark); border-radius: 10px; padding: 20px;">
+            <h3 style="color: var(--primary); margin-bottom: 20px;">3D Model Görüntüleyici</h3>
+            <iframe id="modelViewer" style="width: 100%; height: calc(100% - 60px); border: none; border-radius: 5px; background: white;"></iframe>
+        </div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
@@ -739,8 +760,8 @@
                         <p data-tr="Manyetik Levitasyon Sistemi" data-en="Magnetic Levitation System">Manyetik Levitasyon Sistemi</p>
                         <div class="project-links">
                             <a href="assets/videos/levitron-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/levitron.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/levitron/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/levitron.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/levitron.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -758,8 +779,8 @@
                         <p data-tr="Mekanik Sistem Tasarımı" data-en="Mechanical System Design">Mekanik Sistem Tasarımı</p>
                         <div class="project-links">
                             <a href="assets/videos/handpower-mechanics-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/handpower-mechanics.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/handpower-mechanics/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/handpower-mechanics.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/handpower-mechanics.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -777,8 +798,8 @@
                         <p data-tr="Kamera Stabilizasyon Sistemi" data-en="Camera Stabilization System">Kamera Stabilizasyon Sistemi</p>
                         <div class="project-links">
                             <a href="assets/videos/pantilt-camera-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/pantilt-camera.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/pantilt-camera/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/pantilt-camera.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/pantilt-camera.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -796,7 +817,7 @@
                         <p data-tr="Yüz ve Nesne Takibi" data-en="Face and Object Tracking">Yüz ve Nesne Takibi</p>
                         <div class="project-links">
                             <a href="assets/videos/computer-vision-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/code/computer-vision/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/computer-vision.py')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -814,8 +835,8 @@
                         <p data-tr="Kontrol Sistemleri" data-en="Control Systems">Kontrol Sistemleri</p>
                         <div class="project-links">
                             <a href="assets/videos/rc-car-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/rc-car.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/rc-car/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/rc-car.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/rc-car.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -833,8 +854,8 @@
                         <p data-tr="BLDC Motor Dişli Sistemi" data-en="BLDC Motor Gear System">BLDC Motor Dişli Sistemi</p>
                         <div class="project-links">
                             <a href="assets/videos/planetary-gearbox-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/planetary-gearbox.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/planetary-gearbox/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/planetary-gearbox.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/planetary-gearbox.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -852,8 +873,8 @@
                         <p data-tr="3D Baskı ve Tasarım" data-en="3D Printing and Design">3D Baskı ve Tasarım</p>
                         <div class="project-links">
                             <a href="assets/videos/photo-keychain-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/photo-keychain.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
-                            <a href="assets/code/photo-keychain/" class="project-link nav-link" target="_blank"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/photo-keychain.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="viewArduinoCode('assets/code/photo-keychain.ino')"><i class="fas fa-code"></i> <span data-tr="Kod" data-en="Code">Kod</span></a>
                         </div>
                     </div>
                 </div>
@@ -871,7 +892,7 @@
                         <p data-tr="Batarya Yönetim Sistemi" data-en="Battery Management System">Batarya Yönetim Sistemi</p>
                         <div class="project-links">
                             <a href="assets/videos/battery-bms-demo.mp4" class="project-link nav-link" target="_blank"><i class="fas fa-video"></i> <span data-tr="Video" data-en="Video">Video</span></a>
-                            <a href="assets/3d-models/battery-bms.stl" class="project-link nav-link" target="_blank"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
+                            <a href="#" class="project-link nav-link" onclick="view3DModel('assets/3d-models/battery-bms.stl')"><i class="fas fa-cube"></i> <span data-tr="3D Model" data-en="3D Model">3D Model</span></a>
                             <a href="assets/pdf/battery-bms-schematic.pdf" class="project-link nav-link" target="_blank"><i class="fas fa-file-pdf"></i> <span data-tr="Devre Şeması" data-en="Circuit Diagram">Devre Şeması</span></a>
                         </div>
                     </div>
@@ -974,6 +995,9 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
     <script>
         // Yıldız Efekti Oluşturma
         function createStars() {
@@ -1104,13 +1128,50 @@
             pdfFrame.src = '';
         }
 
+        // Arduino Kodu Görüntüleme
+        function viewArduinoCode(codeUrl) {
+            fetch(codeUrl)
+                .then(response => response.text())
+                .then(code => {
+                    document.getElementById('arduinoCode').textContent = code;
+                    Prism.highlightAll();
+                    document.getElementById('arduinoModal').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Kod yüklenirken hata oluştu:', error);
+                    alert('Kod yüklenirken hata oluştu. Lütfen daha sonra tekrar deneyin.');
+                });
+        }
+
+        // 3D Model Görüntüleme - Online Viewer ile
+        function view3DModel(modelUrl) {
+            const viewer = document.getElementById('modelViewer');
+            // ViewSTL online viewer kullanılıyor
+            viewer.src = `https://www.viewstl.com/?embedded&url=${encodeURIComponent(window.location.origin + '/' + modelUrl)}`;
+            document.getElementById('modelModal').style.display = 'block';
+        }
+
         // Modal kapatma
-        document.querySelector('.close').addEventListener('click', closePdfModal);
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                modal.style.display = 'none';
+                if (modal.id === 'modelModal') {
+                    document.getElementById('modelViewer').src = '';
+                }
+            });
+        });
+
         window.addEventListener('click', function(event) {
-            const modal = document.getElementById('pdfModal');
-            if (event.target === modal) {
-                closePdfModal();
-            }
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    if (modal.id === 'modelModal') {
+                        document.getElementById('modelViewer').src = '';
+                    }
+                }
+            });
         });
 
         // Form gönderme
