@@ -580,49 +580,6 @@
             border-top: 1px solid rgba(0, 168, 255, 0.2);
         }
         
-        /* PDF Görüntüleyici Kontrolleri */
-        .pdf-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(25, 42, 86, 0.7);
-            border-radius: 8px;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10002;
-        }
-        
-        .pdf-controls button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .pdf-controls button:hover {
-            background: var(--secondary);
-        }
-        
-        .pdf-controls button:disabled {
-            background: #666;
-            cursor: not-allowed;
-        }
-        
-        .page-info {
-            color: white;
-            font-weight: bold;
-            min-width: 100px;
-            text-align: center;
-        }
-        
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-content {
@@ -688,22 +645,6 @@
                 width: 35px;
                 height: 35px;
             }
-            
-            .pdf-controls {
-                bottom: 10px;
-                padding: 8px;
-                gap: 10px;
-            }
-            
-            .pdf-controls button {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-            
-            .page-info {
-                min-width: 80px;
-                font-size: 0.9rem;
-            }
         }
     </style>
 </head>
@@ -712,19 +653,6 @@
     <div class="stars-container">
         <div class="stars" id="stars1"></div>
         <div class="stars stars-2" id="stars2"></div>
-    </div>
-
-    <!-- PDF Preview Modal - GÜNCELLENDİ -->
-    <div id="pdfModal" class="modal">
-        <span class="close">&times;</span>
-        <div class="modal-content">
-            <iframe id="pdfFrame" style="width: 100%; height: 100%; border: none; border-radius: 10px;"></iframe>
-            <div class="pdf-controls">
-                <button id="prevPage"><i class="fas fa-chevron-left"></i> Önceki</button>
-                <span class="page-info">Sayfa: <span id="currentPage">1</span> / <span id="totalPages">1</span></span>
-                <button id="nextPage">Sonraki <i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
     </div>
 
     <!-- Arduino Kodu Modal -->
@@ -999,16 +927,16 @@
                 
                 <div class="cv-options">
                     <div class="cv-option">
-                        <div class="cv-preview" onclick="openPdfModal('assets/pdf/cv.pdf')">
+                        <a href="assets/pdf/cv.pdf" class="cv-preview" target="_blank">
                             <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='300' height='400' fill='%23192a56' stroke='%2300a8ff' stroke-width='2'/><rect x='50' y='50' width='80' height='80' fill='%2300a8ff'/><rect x='150' y='50' width='100' height='20' fill='%2300d2d3'/><rect x='150' y='80' width='100' height='15' fill='%23f5f6fa'/><rect x='150' y='105' width='100' height='15' fill='%23f5f6fa'/><rect x='50' y='150' width='200' height='20' fill='%2300d2d3'/><rect x='50' y='190' width='200' height='15' fill='%23f5f6fa'/><rect x='50' y='215' width='200' height='15' fill='%23f5f6fa'/><rect x='50' y='250' width='200' height='20' fill='%2300d2d3'/><rect x='50' y='290' width='200' height='15' fill='%23f5f6fa'/><rect x='50' y='315' width='200' height='15' fill='%23f5f6fa'/></svg>" alt="CV Önizleme">
-                        </div>
+                        </a>
                         <a href="assets/pdf/cv.pdf" class="btn nav-link" download><i class="fas fa-download"></i> <span data-tr="CV'yi İndir (PDF)" data-en="Download CV (PDF)">CV'yi İndir (PDF)</span></a>
                     </div>
                     
                     <div class="cv-option">
-                        <div class="cv-preview" onclick="openPdfModal('assets/pdf/transcript.pdf')">
+                        <a href="assets/pdf/transcript.pdf" class="cv-preview" target="_blank">
                             <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='300' height='400' fill='%23192a56' stroke='%2300d2d3' stroke-width='2'/><rect x='50' y='50' width='200' height='30' fill='%2300d2d3'/><rect x='50' y='100' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='130' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='160' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='200' width='200' height='30' fill='%2300d2d3'/><rect x='50' y='250' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='280' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='310' width='200' height='20' fill='%23f5f6fa'/><rect x='50' y='340' width='200' height='20' fill='%23f5f6fa'/></svg>" alt="Transkript Önizleme">
-                        </div>
+                        </a>
                         <a href="assets/pdf/transcript.pdf" class="btn nav-link" download><i class="fas fa-download"></i> <span data-tr="Transkript İndir (PDF)" data-en="Download Transcript (PDF)">Transkript İndir (PDF)</span></a>
                     </div>
                 </div>
@@ -1087,11 +1015,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
     <script>
-        // PDF Görüntüleyici için değişkenler - GÜNCELLENDİ
-        let currentPdf = null;
-        let currentPage = 1;
-        let totalPages = 10; // Varsayılan sayfa sayısı
-        
         // Yıldız Efekti Oluşturma
         function createStars() {
             const starsContainer1 = document.getElementById('stars1');
@@ -1209,62 +1132,6 @@
         // Modal yönetimi
         let activeModal = null;
 
-        // PDF Modal Fonksiyonları - GÜNCELLENDİ
-        function openPdfModal(pdfUrl) {
-            closeAllModals();
-            currentPdf = pdfUrl;
-            currentPage = 1;
-            
-            const modal = document.getElementById('pdfModal');
-            const pdfFrame = document.getElementById('pdfFrame');
-            
-            // PDF'yi yükle
-            pdfFrame.src = pdfUrl;
-            
-            // Sayfa bilgisini güncelle
-            updatePageInfo();
-            
-            modal.style.display = 'block';
-            activeModal = modal;
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Sayfa bilgisini güncelle
-        function updatePageInfo() {
-            document.getElementById('currentPage').textContent = currentPage;
-            document.getElementById('totalPages').textContent = totalPages;
-            
-            // Sayfa geçiş butonlarını kontrol et
-            document.getElementById('prevPage').disabled = (currentPage <= 1);
-            document.getElementById('nextPage').disabled = (currentPage >= totalPages);
-        }
-
-        // Önceki sayfa - GÜNCELLENDİ
-        document.getElementById('prevPage').addEventListener('click', function() {
-            if (currentPage > 1) {
-                currentPage--;
-                const pdfFrame = document.getElementById('pdfFrame');
-                
-                // PDF'yi yükle ve doğru sayfaya git
-                // Not: Bu yöntem sadece tarayıcıların yerleşik PDF görüntüleyicisi destekliyorsa çalışır
-                // PDF.js gibi bir kütüphane kullanmak daha iyi olurdu
-                pdfFrame.src = currentPdf + '#page=' + currentPage;
-                updatePageInfo();
-            }
-        });
-
-        // Sonraki sayfa - GÜNCELLENDİ
-        document.getElementById('nextPage').addEventListener('click', function() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                const pdfFrame = document.getElementById('pdfFrame');
-                
-                // PDF'yi yükle ve doğru sayfaya git
-                pdfFrame.src = currentPdf + '#page=' + currentPage;
-                updatePageInfo();
-            }
-        });
-
         // Arduino Kodu Görüntüleme
         function viewArduinoCode(codeUrl) {
             closeAllModals();
@@ -1341,7 +1208,6 @@
             });
             
             // IFrame'leri temizle
-            document.getElementById('pdfFrame').src = '';
             document.getElementById('modelViewer').src = '';
             
             activeModal = null;
@@ -1370,10 +1236,6 @@
                     }
                 });
             });
-            
-            // PDF sayfa sayısını varsayılan olarak 10 olarak ayarla
-            // Gerçek uygulamada PDF.js kullanarak sayfa sayısını tespit edebilirsiniz
-            totalPages = 10;
         });
 
         // Form gönderme
