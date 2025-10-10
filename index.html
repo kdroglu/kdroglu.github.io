@@ -714,7 +714,7 @@
         <div class="stars stars-2" id="stars2"></div>
     </div>
 
-    <!-- PDF Preview Modal -->
+    <!-- PDF Preview Modal - GÜNCELLENDİ -->
     <div id="pdfModal" class="modal">
         <span class="close">&times;</span>
         <div class="modal-content">
@@ -1087,10 +1087,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-cpp.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-python.min.js"></script>
     <script>
-        // PDF Görüntüleyici için değişkenler
+        // PDF Görüntüleyici için değişkenler - GÜNCELLENDİ
         let currentPdf = null;
         let currentPage = 1;
-        let totalPages = 1;
+        let totalPages = 10; // Varsayılan sayfa sayısı
         
         // Yıldız Efekti Oluşturma
         function createStars() {
@@ -1219,7 +1219,7 @@
             const pdfFrame = document.getElementById('pdfFrame');
             
             // PDF'yi yükle
-            pdfFrame.src = pdfUrl + '#page=1';
+            pdfFrame.src = pdfUrl;
             
             // Sayfa bilgisini güncelle
             updatePageInfo();
@@ -1239,21 +1239,27 @@
             document.getElementById('nextPage').disabled = (currentPage >= totalPages);
         }
 
-        // Önceki sayfa
+        // Önceki sayfa - GÜNCELLENDİ
         document.getElementById('prevPage').addEventListener('click', function() {
             if (currentPage > 1) {
                 currentPage--;
                 const pdfFrame = document.getElementById('pdfFrame');
+                
+                // PDF'yi yükle ve doğru sayfaya git
+                // Not: Bu yöntem sadece tarayıcıların yerleşik PDF görüntüleyicisi destekliyorsa çalışır
+                // PDF.js gibi bir kütüphane kullanmak daha iyi olurdu
                 pdfFrame.src = currentPdf + '#page=' + currentPage;
                 updatePageInfo();
             }
         });
 
-        // Sonraki sayfa
+        // Sonraki sayfa - GÜNCELLENDİ
         document.getElementById('nextPage').addEventListener('click', function() {
             if (currentPage < totalPages) {
                 currentPage++;
                 const pdfFrame = document.getElementById('pdfFrame');
+                
+                // PDF'yi yükle ve doğru sayfaya git
                 pdfFrame.src = currentPdf + '#page=' + currentPage;
                 updatePageInfo();
             }
