@@ -983,18 +983,18 @@
                 
                 <div class="contact-form">
                     <h3 data-tr="Mesaj Gönder" data-en="Send Message">Mesaj Gönder</h3>
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/mjvzqjdk" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Adınız" data-tr-placeholder="Adınız" data-en-placeholder="Your Name" required>
+                            <input type="text" class="form-control" name="name" placeholder="Adınız" data-tr-placeholder="Adınız" data-en-placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="E-posta Adresiniz" data-tr-placeholder="E-posta Adresiniz" data-en-placeholder="Your E-mail" required>
+                            <input type="email" class="form-control" name="email" placeholder="E-posta Adresiniz" data-tr-placeholder="E-posta Adresiniz" data-en-placeholder="Your E-mail" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Konu" data-tr-placeholder="Konu" data-en-placeholder="Subject" required>
+                            <input type="text" class="form-control" name="subject" placeholder="Konu" data-tr-placeholder="Konu" data-en-placeholder="Subject" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="Mesajınız" data-tr-placeholder="Mesajınız" data-en-placeholder="Your Message" required></textarea>
+                            <textarea class="form-control" name="message" placeholder="Mesajınız" data-tr-placeholder="Mesajınız" data-en-placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn nav-link" data-tr="Mesaj Gönder" data-en="Send Message">Mesaj Gönder</button>
                     </form>
@@ -1238,11 +1238,10 @@
             });
         });
 
-        // Form gönderme
+        // Form gönderme - GÜNCELLENDİ
         document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Mesajınız alınmıştır. En kısa sürede dönüş yapacağım.');
-            this.reset();
+            // Formspree otomatik olarak işleyecek, burada sadece kullanıcıyı bilgilendiriyoruz
+            alert('Mesajınız gönderiliyor... Teşekkür ederim!');
         });
         
         // Tıklama event'leri
