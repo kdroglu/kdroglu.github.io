@@ -494,22 +494,20 @@
         
         /* Contact Section */
         .contact-content {
-            display: flex;
-            gap: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
         }
         
         .contact-info {
-            flex: 1;
-        }
-        
-        .contact-form {
-            flex: 1;
+            margin-bottom: 40px;
         }
         
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+            justify-content: center;
         }
         
         .contact-icon {
@@ -528,11 +526,12 @@
             display: flex;
             gap: 15px;
             margin-top: 30px;
+            justify-content: center;
         }
         
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: rgba(25, 42, 86, 0.5);
             display: flex;
@@ -541,35 +540,12 @@
             color: var(--light);
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 1.5rem;
         }
         
         .social-link:hover {
             background: var(--primary);
             transform: translateY(-5px);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(25, 42, 86, 0.5);
-            border: 1px solid rgba(0, 168, 255, 0.3);
-            border-radius: 5px;
-            color: var(--light);
-            font-size: 1rem;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
         }
         
         /* Footer */
@@ -583,10 +559,6 @@
         /* Responsive Design */
         @media (max-width: 992px) {
             .about-content {
-                flex-direction: column;
-            }
-            
-            .contact-content {
                 flex-direction: column;
             }
             
@@ -961,7 +933,7 @@
                         </div>
                         <div>
                             <h4 data-tr="E-posta" data-en="E-mail">E-posta</h4>
-                            <p>kadir.k1998@gmail.com</p>
+                            <p><a href="mailto:kadir.k1998@gmail.com" style="color: var(--primary); text-decoration: none;">kadir.k1998@gmail.com</a></p>
                         </div>
                     </div>
                     
@@ -979,25 +951,6 @@
                         <a href="https://linkedin.com/in/kadir-kadiroğlu-4a94a4278" class="social-link nav-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                         <a href="https://github.com/kdiroglu" class="social-link nav-link" target="_blank"><i class="fab fa-github"></i></a>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <h3 data-tr="Mesaj Gönder" data-en="Send Message">Mesaj Gönder</h3>
-                    <form id="contactForm" action="https://formspree.io/f/mjvzqjdk" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="name" placeholder="Adınız" data-tr-placeholder="Adınız" data-en-placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" placeholder="E-posta Adresiniz" data-tr-placeholder="E-posta Adresiniz" data-en-placeholder="Your E-mail" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="subject" placeholder="Konu" data-tr-placeholder="Konu" data-en-placeholder="Subject" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" placeholder="Mesajınız" data-tr-placeholder="Mesajınız" data-en-placeholder="Your Message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn nav-link" data-tr="Mesaj Gönder" data-en="Send Message">Mesaj Gönder</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -1238,12 +1191,6 @@
             });
         });
 
-        // Form gönderme - GÜNCELLENDİ
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            // Formspree otomatik olarak işleyecek, burada sadece kullanıcıyı bilgilendiriyoruz
-            alert('Mesajınız gönderiliyor... Teşekkür ederim!');
-        });
-        
         // Tıklama event'leri
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
